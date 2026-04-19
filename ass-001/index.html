@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Kiosk</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Progress bar -->
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- MENU -->
+<div class="slide active">
+    <h1 class="glitch-brand" data-text="9 WORDS">9 WORDS</h1>
+    <p>Select an album</p>
+    <button onclick="showSlide(1)">Enter</button>
+</div>
+
+<!-- ALBUM SLIDE -->
+<div class="slide">
+
+    <div class="album" onclick="openAlbum('Jackboys 2','download (2).jpeg','Jackboys','https://open.spotify.com/album/32lGAqeVkdJxEj2iv2Q01B')">
+        <img src="download (2).jpeg">
+        <h1 class="glitch" data-text="Jackboys 2">Jackboys 2</h1>
+    </div>
+
+    <div class="album" onclick="openAlbum('Blonde','download (1).jpeg','Frank Ocean','https://open.spotify.com/album/3mH6qwIy9crq0I9YQbOuDf')">
+        <img src="download (1).jpeg">
+        <h1 class="glitch" data-text="Blonde">Blonde</h1>
+    </div>
+
+    <div class="album" onclick="openAlbum('Long.Live.A$AP','usa aesthetic wallpaper.jpeg','A$AP Rocky','https://open.spotify.com/album/6rzMufuu8sLkIizM4q9c7J')">
+        <img src="usa aesthetic wallpaper.jpeg">
+        <h1 class="glitch" data-text="Long.Live.A$AP">Long.Live.A$AP</h1>
+    </div>
+
+    <button onclick="showSlide(0)">Home</button>
+</div>
+
+<!-- details -->
+<div class="slide" id="detailSlide">
+    <h1 id="detailTitle"></h1>
+    <img id="detailImage">
+    <p id="detailArtist"></p>
+
+    <button onclick="openSpotify()">Open in Spotify</button>
+    <button onclick="showSlide(1)">Back</button>
+</div>
+
+<audio id="clickSound" src="click.mp3"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>

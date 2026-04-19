@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal - Karl Morr</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+ 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <ul class="nav-links">
+        <li><a href="index.html">home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="journal.html">Journal</a></li>
+        </ul>
+    </nav>
+
+<section id="journal-section" class="container">
+    <div class="row justify-content-center text-center">
+        <div class="col-md-8">
+            <h1>My journal</h1>
+            <h2>Write something</h2>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form id="journal-form" class="mb-4">
+                <input type="text" id="entry-title" placeholder="Title" required>
+                <textarea id="entry-content" placeholder="what is on your mind" required></textarea>
+                <button type="submit">Save entry</button>
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="entries-container"></div>
+        </div>
+    </div>
+</section>
+
+    <p class="journal-intro">Thoughts i need to let out - raw and real</p>
+   
+        <a href="index.html">
+            <button>Back to home</button>
+        </a>
+    </div>
+  <audio id="click-sound" src="typing-sound-02-229861.mp3" preload="auto"></audio>
+
+<script>
+  const sound = document.getElementById('click-sound');
+  const btn = document.getElementById('Back-to-home-btn');
+
+  btn.addEventListener('click', () => {
+    sound.currentTime = 0;
+    sound.play().then(() => {
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 200); // delay so the sound plays before navigating
+    }).catch(e => console.error('Sound play failed', e));
+  });
+</script>
+
+    
+    <script>
+        const entries = document.querySelectorAll('.entry');
+
+        const observer = new IntersectionObserver((entrieslist)=>{
+            entrieslist.forEach(entry =>{
+                if(entry.isIntersecting){
+                    entry.target.classlist.add('visible');
+                }
+            });
+        }, {threshold: 0.3});
+
+        entries.forEach(entry => {
+            observer.observe(entry);
+            
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script>
+  const form = document.getElementById('journal-form');
+  const titleInput = document.getElementById('entry-title');
+  const contentInput = document.getElementById('entry-content');
+  const container = document.querySelector('.entries-container');
+
+  let journalEntries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+
+  function saveToLocalStorage() {
+    localStorage.setItem('journalEntries', JSON.stringify(journalEntries));
+  }
+
+  function renderEntries() {
+    container.innerHTML = '';
+    journalEntries.forEach((entry, index) => {
+      const entryDiv = document.createElement('div');
+      entryDiv.classList.add('entry');
+      entryDiv.innerHTML = `
+        <h3>${entry.title}</h3>
+        <p>${entry.content}</p>
+        <small class="timestamp">${entry.timestamp}</small>
+        <div class="entry-actions">
+          <button class="edit-btn" data-index="${index}">Edit</button>
+          <button class="delete-btn" data-index="${index}">Delete</button>
+        </div>
+      `;
+      container.prepend(entryDiv);
+    });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const title = titleInput.value.trim();
+    const content = contentInput.value.trim();
+    const timestamp = new Date().toLocaleString();
+
+    if (title && content) {
+      const newEntry = { title, content, timestamp };
+      journalEntries.unshift(newEntry);
+      saveToLocalStorage();
+      renderEntries();
+      form.reset();
+    }
+  });
+
+  container.addEventListener('click', function (e) {
+    const index = e.target.getAttribute('data-index');
+
+    if (e.target.classList.contains('delete-btn')) {
+      journalEntries.splice(index, 1);
+      saveToLocalStorage();
+      renderEntries();
+    }
+
+    if (e.target.classList.contains('edit-btn')) {
+      const entry = journalEntries[index];
+      const newTitle = prompt('Edit title:', entry.title);
+      const newContent = prompt('Edit content:', entry.content);
+
+      if (newTitle !== null && newContent !== null) {
+        journalEntries[index].title = newTitle;
+        journalEntries[index].content = newContent;
+        journalEntries[index].timestamp = new Date().toLocaleString();
+        saveToLocalStorage();
+        renderEntries();
+      }
+    }
+  });
+
+  // Initial load
+  renderEntries();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- Slides -->
+<div class="slide active">
+    <div class="album">
+    <img src="download (2).jpeg" width="300"></div>
+    <a href="https://open.spotify.com/album/32lGAqeVkdJxEj2iv2Q01B" target="_blank">
+      <div class="album"> <h1 class="glitch" data-text="Jackboys 2">Jackboys 2</h1></a>
+        </div>
+    <p>Jackboys</p>
+    <button onclick="nextSlide()">Next</button>
+    
+</div>
+
+<div class="slide">
+<div class="album">
+    <img src="download (1).jpeg" width="300">
+    </div>
+    <a href="https://open.spotify.com/album/3mH6qwIy9crq0I9YQbOuDf" target="_blank">
+       <div class="album"> <h1 class="glitch" data-text="Blonde">Blonde</h1></a>
+        </div>
+
+
+    <p>Frank Ocean</p>
+    <button onclick="prevSlide()">Previous</button>
+    <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide">
+    <div class="album">
+        <img src="usa aesthetic wallpaper.jpeg" width="300">
+    </div>
+    <div class="album">
+    <a href="https://open.spotify.com/album/6rzMufuu8sLkIizM4q9c7J" target="_blank">
+        <h1 class="glitch" data-text="Long.live.Asap">Long.live.Asap</h1>
+    </a>
+    </div>
+    <p>A$AP Rocky</p>
+    <button onclick="prevSlide()">Previous</button>
+    <button onclick="showSlide(0)">Home</button>
+</div>
+
+<!-- Audio -->
+<audio id="clickSound" src="click.wav"></audio>
+<audio id="bgmusic" loop>
+    <source src="NBA Youngboy - I Know [Instrumental].mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
+</body>
+</html>

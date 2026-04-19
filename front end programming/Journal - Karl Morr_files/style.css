@@ -1,0 +1,461 @@
+body{
+    background-color: darkgray;
+    color: #f1f5f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 40px;
+
+    cursor: url('cursor (1).cur'), auto;
+    animation: pageFade 1s ease-in-out;
+}
+
+@keyframes pageFade {
+    from{
+        opacity: 0;
+        filter: blur(10px);
+    }
+    to{
+        opacity: 1;
+        filter: blur(10px);
+    }
+}
+
+
+h1{
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    animation: fadeSlide 1s ease forwards;
+   opacity: 0;
+}
+
+@keyframes fadeSlide {
+    0% {
+        opacity: 0;
+        transform:translateY(-30px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h6{
+    font-style: italic;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+ul{
+    list-style-type: square;
+    padding: 0;
+}
+
+li{
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+s
+li:hover{
+    color: #c80ec1;
+    text-shadow: 0 0 10px rgba(200, 14, 193, 0.7);
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+
+li:nth-child(){
+    animation-delay:0.5s ;
+}
+li:nth-child(){
+    animation-delay: 0.8s;
+}
+li:nth-child(){
+    animation-delay: 1.1s;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+button{
+    background-color: black;
+    color: #c80ec1;
+    padding:10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+button:hover{
+    color: black;
+    background-color:  #c80ec1;
+    box-shadow: 0 0 15px rgba(201, 7, 166, 0.6);
+    transform: scale(1.07);
+}
+nav{
+    margin-bottom: 30px;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links a {
+    position: relative;
+    display: inline-block;
+    color: #f1f5f9;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    animation: slideFadeIn o.8s ease forwards;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #c80ec1;
+    transition: width 0.3s ease;
+    -webkit-transition: width 0.3s ease;
+    color: #c80ec1;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    left: 0;
+    right: auto;
+}
+.nav-links a:nth-child(1){
+    animation-delay: 0.2s;
+}
+.nav-links a:nth-child(2){
+    animation-delay: 0.4s;
+}
+
+@keyframes slideFadeIn{
+    0%{
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media(max-width: 600px){
+    .nav-links{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    h1  {
+        font-size: 2rem;
+    }
+    button{
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    body{
+        padding: 20px;
+    }
+}
+
+.journal-intro{
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.journal-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    text-align: left;
+}
+
+.entry{
+    background-color: rgba(0, 0,0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.entry:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0,0, 0.3);
+}
+
+.entry h3{
+    margin-bottom: 10px;
+    color: #c80ec1;
+}
+
+.entry {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.entry.visible{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#journal-section{
+    max-width: 60px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#journal-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+
+}
+
+#journal-form input,
+#journal-form textarea{
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    font-family: inherit;
+}
+
+#journal-form button{
+    align-self: flex-start;
+}
+
+#entries-container .entry{
+    background:rgba(0, 0,0, 0.2);
+    border-radius: 8px;
+    padding:15px;
+    margin-bottom: 15px;
+    animation: fadeSlide 0.8s ease;
+
+}
+
+
+.timestamp{
+    display: block;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+.entry-actions{
+    margin-top: 10px;
+}
+
+.entry-actions button{
+    background-color: transparent;
+    border: 1px solid #c80ec1;
+    color: #c80ec1;
+    padding: 5px 10px;
+    margin-right: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+}
+
+.entry-actions button:hover{
+    background-color: #c80ec1;
+    color: black;
+}
+.journal-container{
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 30px auto;
+    box-shadow: 0 0 25px rgba(200, 14, 193, 0.2);
+    color: #f1f5f9;
+    animation: fadeslide 1s ease forwards;
+}
+
+.journal-container h2{
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #c80ec1;
+}
+
+.journal-container label{
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.journal-container input,
+.journal-container textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c80ec1;
+    border-radius: 6px;
+    background-color: #2a2a2a;
+    color: #f1f5f9;
+    font-size: 1rem;
+    resize: none;
+    transition: border 0.3s ease;
+}
+
+.journal-container input:focus,
+.journal-container textarea:focus {
+    outline: none;
+    border-color: #f1f5f9;
+}
+
+.journal-container button {
+    margin-top: 20px;
+    background-color: #c80ec1;
+    color: black;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all0.3s ease;
+}
+
+.journal-container button:hover{
+    background-color: black;
+    color: #c80ec1;
+    box-shadow: 0 0 12px rgba(200, 14, 193, 0.5);
+    transform: scale(1.05);
+}
+
+.entries {
+    max-width: 700px;
+    margin: 30px auto;
+
+}
+
+.entry{
+    background-color: #2e2e2e;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: #f1f5f9;
+    text-align: left;
+    animation: fadeSlide 0.5s ease;
+}
+
+.entry h3{
+    color: #c80ec1;
+    margin-bottom: 10px;
+}
+.entry-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.entry-buttons button {
+  background-color: transparent;
+  border: 1px solid #c80ec1;
+  color: #c80ec1;
+  padding: 5px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.entry-buttons button:hover {
+  background-color: #c80ec1;
+  color: black;
+}
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+.entry p {
+  font-family: 'Courier Prime', monospace;
+  line-height: 1.6;
+}
+/* Journal Form Styling */
+form {
+  max-width: 600px;
+  margin: 0 auto 5px;
+  display: flex;
+  
+  gap: 5px;
+  width: 600px;
+}
+
+label {
+  font-weight: 600;
+  color: #f1f5f9;
+  text-align: left;
+}
+input[type="text"]::placeholder {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+.form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: left;
+  background-color: rgba(0, 0,0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0,0, 0.3);
+}
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #2a2a2a;
+  color: #f1f5f9;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  resize: none;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease }
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  background-color: #3a3a3a;
+  transform: scale(1.01);
+}

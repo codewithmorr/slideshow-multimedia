@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body{
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    background: linear-gradient(135deg , #b1405a, #e1ff02);
+    color: white;
+}
+
+
+.progress-container{
+    width: 100%;
+    height: 6px;
+    background: #333;
+    position: fixed;
+    top: 0;
+}
+
+.progress-bar{
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(135deg , #e1ff02, #b1405a);
+    transition: width 0.3s ease;
+}
+
+
+.slide{
+    display: none;
+    height: 100vh;
+    padding-top: 120px;
+}
+
+.slide.active{
+    display: block;
+}
+
+/* Album */
+.album{
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.album img{
+    width: 250px;
+    transition: transform 0.3s ease;
+}
+
+.album:hover img{
+    transform: scale(1.05);
+}
+
+
+.glitch, .glitch-brand{
+    position: relative;
+    display: inline-block;
+    color: #000000;
+}
+
+.glitch::before,
+.glitch::after,
+.glitch-brand::before,
+.glitch-brand::after{
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    clip: rect(0,900px,0,0);
+}
+
+.glitch::before,
+.glitch-brand::before{ color: #0ff; }
+
+.glitch::after,
+.glitch-brand::after{ color: #f0f; }
+
+/*hover effects*/
+.album:hover .glitch,
+.glitch-brand:hover{
+    animation: flicker 1.5s infinite;
+}
+
+.album:hover .glitch::before,
+.album:hover .glitch::after,
+.glitch-brand:hover::before,
+.glitch-brand:hover::after{
+    animation: glitch 0.8s infinite linear alternate-reverse;
+}
+
+
+button{
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+@keyframes glitch{
+    0% { transform: translate(2px,-2px); }
+    50% { transform: translate(-2px,2px); }
+    100% { transform: translate(2px,2px); }
+}
+
+@keyframes flicker{
+    0%,100% { opacity:1; }
+    50% { opacity:0.6; }
+}

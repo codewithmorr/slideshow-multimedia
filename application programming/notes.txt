@@ -1,0 +1,9 @@
+9 rows and columns 
+rowspan and colspan9 and 8 respectively
+
+
+ordered and unordered list
+
+
+forms
+disadvantage of javascript is limited in built functions.
