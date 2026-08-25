@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Clone</title>
+    <style>
+        body { 
+            font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            background-color: #121213; 
+            color: #ffffff; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        h1 { margin-bottom: 10px; border-bottom: 1px solid #3a3a3c; padding-bottom: 10px; width: 100%; text-align: center; max-width: 350px;}
+        .board { display: grid; grid-template-rows: repeat(6, 1fr); grid-gap: 5px; margin-bottom: 20px; }
+        .row { display: grid; grid-template-columns: repeat(5, 1fr); grid-gap: 5px; }
+        .tile { 
+            width: 60px; 
+            height: 60px; 
+            border: 2px solid #3a3a3c; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 2rem; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            transition: all 0.3s ease;
+        }
+        .correct { background-color: #538d4e; border-color: #538d4e; }
+        .present { background-color: #b59f3b; border-color: #b59f3b; }
+        .absent { background-color: #3a3a3c; border-color: #3a3a3c; }
+        #message { height: 20px; margin-bottom: 20px; font-weight: bold; color: #ffffff; }
+    </style>
+</head>
+<body>
+    <h1>Wordle Clone</h1>
+    <div id="message"></div>
+    <div class="board" id="board"></div>
+
+    <script>
+        // Game Settings
+        const TARGET_WORD = "REACT"; // Change this to any 5-letter word!
+        const WORD_LENGTH = 5;
+        const MAX_GUESSES = 6;
+        
+        let currentGuess = "";
+        let currentRow = 0;
+        let gameOver = false;
+
+        const board = document.getElementById("board");
+        const message = document.getElementById("message");
+
+        // Generate the game grid
+        for (let i = 0; i < MAX_GUESSES; i++) {
+            const row = document.createElement("div");
+            row.className = "row";
+            for (let j = 0; j < WORD_LENGTH; j++) {
+                const tile = document.createElement("div");
+                tile.className = "tile";
+                tile.id = `tile-${i}-${j}`;
+                row.appendChild(tile);
+            }
+            board.appendChild(row);
+        }
+
+        // Listen for keyboard input
+        document.addEventListener("keydown", (e) => {
+            if (gameOver) return;
+
+            const key = e.key.toUpperCase();
+
+            if (key === "ENTER") {
+                if (currentGuess.length === WORD_LENGTH) {
+                    checkGuess();
+                } else {
+                    showMessage("Not enough letters");
+                }
+            } else if (key === "BACKSPACE") {
+                currentGuess = currentGuess.slice(0, -1);
+                updateBoard();
+            } else if (/^[A-Z]$/.test(key) && currentGuess.length < WORD_LENGTH) {
+                currentGuess += key;
+                updateBoard();
+            }
+        });
+
+        // Update the visual grid as the user types
+        function updateBoard() {
+            for (let i = 0; i < WORD_LENGTH; i++) {
+                const tile = document.getElementById(`tile-${currentRow}-${i}`);
+                tile.textContent = currentGuess[i] || "";
+            }
+        }
+
+        // Validate the guess against the target word
+        function checkGuess() {
+            const guessArray = currentGuess.split("");
+            const targetArray = TARGET_WORD.split("");
+            
+            // First pass: mark completely correct letters (Green)
+            for (let i = 0; i < WORD_LENGTH; i++) {
+                const tile = document.getElementById(`tile-${currentRow}-${i}`);
+                if (guessArray[i] === targetArray[i]) {
+                    tile.classList.add("correct");
+                    targetArray[i] = null; // Mark as handled to avoid double-counting
+                    guessArray[i] = null;
+                }
+            }
+
+            // Second pass: mark present (Yellow) or absent (Gray) letters
+            for (let i = 0; i < WORD_LENGTH; i++) {
+                if (guessArray[i] === null) continue; // Skip letters already marked green
+                
+                const tile = document.getElementById(`tile-${currentRow}-${i}`);
+                const indexInTarget = targetArray.indexOf(guessArray[i]);
+                
+                if (indexInTarget > -1) {
+                    tile.classList.add("present");
+                    targetArray[indexInTarget] = null; // Mark as handled
+                } else {
+                    tile.classList.add("absent");
+                }
+            }
+
+            // Check win/loss condition
+            if (currentGuess === TARGET_WORD) {
+                showMessage("Genius! You won.");
+                gameOver = true;
+            } else {
+                currentRow++;
+                currentGuess = "";
+                if (currentRow === MAX_GUESSES) {
+                    showMessage(`Game Over! The word was ${TARGET_WORD}`);
+                    gameOver = true;
+                }
+            }
+        }
+
+        // Utility to briefly show alerts
+        function showMessage(msg) {
+            message.textContent = msg;
+            if(!gameOver) {
+                setTimeout(() => message.textContent = "", 2000);
+            }
+        }
+    </script>
+</body>
+</html>
